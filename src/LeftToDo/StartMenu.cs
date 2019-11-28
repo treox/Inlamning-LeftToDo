@@ -15,8 +15,8 @@ namespace LeftToDo
         {
             start:
             Console.WriteLine();
-            Console.WriteLine("[1] Lägg till aktivitet");
-            Console.WriteLine("[2] Visa aktivitetslista");
+            Console.WriteLine("[1] Lägg till uppgift");
+            Console.WriteLine("[2] Visa lista på uppgifter");
             Console.WriteLine("[3] Arkivera uppgifter");
             Console.WriteLine("[4] Visa arkiv");
             Console.WriteLine("[5] Avsluta");
@@ -63,20 +63,20 @@ namespace LeftToDo
                         }
                     }
 
-                    int atIndex = -1;
                     startLoop:
+                    int atIndex = -1;
                     foreach (Task task in taskList.listOfTasks)
                     {
                         atIndex += 1;
                         if (task.done == true)
                         {
-                            Console.WriteLine(atIndex);
-                            taskList.listOfTasks.RemoveAt(atIndex);
-                            goto startLoop;
+                                Console.WriteLine(atIndex);
+                                taskList.listOfTasks.RemoveAt(atIndex);
+                                goto startLoop;
                         }
-                        else
+                        else if (task.done == false)
                         {
-                            continue;
+                           continue;     
                         }
                     }                    
                     goto start;
