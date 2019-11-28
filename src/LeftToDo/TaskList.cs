@@ -11,9 +11,9 @@ namespace LeftToDo
 
         public void CreateTask()
         {                
-            Console.Write("Skriv in namn på aktivitet: ");
+            Console.Write("Skriv in namn på uppgift: ");
             string taskName = Console.ReadLine();
-            Console.Write("Skriv in datum när aktiviteten ska vara klar: ");
+            Console.Write("Skriv in datum när uppgiften ska vara klar: ");
             string taskDueDate = Console.ReadLine();
             bool taskDone = false;
 
@@ -22,19 +22,31 @@ namespace LeftToDo
 
         public void ChangeStateOfTask()
         {
-            Console.Write("Vill du ändra till Done? [y]");
+            Console.Write("Vill du ändra uppgift till Utförd? Om ja välj [y]");
             
             ConsoleKeyInfo choice;
             choice = Console.ReadKey();
 
             if (choice.Key == ConsoleKey.Y)
             {
-                Console.WriteLine("Välj vilken aktivitet du vill ändra [nr]");
-                strNumberKey = Console.ReadLine();
-                Console.WriteLine(listOfTasks.Count);
-                int numberKey = Int32.Parse(strNumberKey);
-            
-                listOfTasks[numberKey - 1].done = true;
+                try
+                {
+                Console.WriteLine("Välj vilken uppgift du vill ändra till Utförd. Välj uppgift [nr.]");
+                
+                    strNumberKey = Console.ReadLine();
+                    Console.WriteLine(listOfTasks.Count);
+                
+                    int numberKey = Int32.Parse(strNumberKey);
+                    listOfTasks[numberKey - 1].done = true;
+                }
+                catch(FormatException)
+                {                    
+                    Console.WriteLine("Otillåtet val. Välj uppgift [nr.]");
+                }
+                catch(ArgumentOutOfRangeException)
+                {                    
+                    Console.WriteLine("Otillåtet val. Välj uppgift [nr.]");
+                }
             }
             else if (choice.Key != ConsoleKey.Y)
             {

@@ -36,13 +36,13 @@ namespace LeftToDo
                         count += 1;
                         if (task.done == true)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine($"Aktivitet {count}: {task.activityName} Done {0}", Console.ForegroundColor);
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine($"Uppgift [{count}]: {task.activityName} Utförd {0}", Console.ForegroundColor);
                             Console.ForegroundColor = ConsoleColor.Gray;
                         }
                         else
                         {
-                            Console.WriteLine($"Aktivitet {count}: {task.activityName} Deadline: {task.activityDueDate}");
+                            Console.WriteLine($"Uppgift [{count}]: {task.activityName} Deadline: {task.activityDueDate}");
                         }
                     }
                     taskList.ChangeStateOfTask();
@@ -81,11 +81,11 @@ namespace LeftToDo
                     }                    
                     goto start;
                 case ConsoleKey.D4:
-                    count = 0;
                     foreach (Task archivedTask in archiveList.listOfArchive)
                     {
-                        count += 1;
-                        Console.WriteLine($"Aktivitet {count}: {archivedTask.activityName} Done");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine($"Uppgift: {archivedTask.activityName} Utförd {0}", Console.ForegroundColor);
+                        Console.ForegroundColor = ConsoleColor.Gray;
                     }
                     goto start;
                 case ConsoleKey.D5:
