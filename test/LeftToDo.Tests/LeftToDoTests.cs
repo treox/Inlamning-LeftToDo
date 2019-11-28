@@ -44,5 +44,43 @@ namespace LeftToDo.Tests
             Assert.True(taskList.listOfTasks[1].done);
 
         }
+
+        [Fact]
+        public void ArchiveFinishedTasks()
+        {
+            // arrange
+            TaskList taskList = new TaskList();
+            ArchiveList archiveList = new ArchiveList();
+            
+            // act
+            taskList.listOfTasks.Add(new Task("Testtask 1", "2019.11.29", true));
+            taskList.listOfTasks.Add(new Task("Testtask 2", "2019.11.29", true));
+
+            int count = 0;
+            foreach (Task task in taskList.listOfTasks)
+            {
+                count += 1;
+                if (task.done == true)
+                {
+                    archiveList.listOfArchive.Add(new Task(task.activityName, task.activityDueDate, task.done));
+                }
+            }
+
+            startLoop:
+            int atIndex = -1;
+            foreach (Task task in taskList.listOfTasks)
+            {
+                atIndex += 1;
+                if (task.done == true)
+                {
+                    taskList.listOfTasks.RemoveAt(atIndex);
+                    goto startLoop;
+                }
+            }
+
+            // assert
+            Assert.Equal(2, archiveList.listOfArchive.Count);
+            Assert.Empty(taskList.listOfTasks);
+        } 
     }
 }
