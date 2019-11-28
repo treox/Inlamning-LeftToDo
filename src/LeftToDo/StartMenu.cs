@@ -30,7 +30,6 @@ namespace LeftToDo
                     taskList.CreateTask();
                     goto start;
                 case ConsoleKey.D2:
-                    // TaskList taskList2 = new TaskList();
                     int count = 0;
                     foreach(Task task in taskList.listOfTasks)
                     {
@@ -63,7 +62,23 @@ namespace LeftToDo
                             continue;
                         }
                     }
-                    
+
+                    int atIndex = -1;
+                    startLoop:
+                    foreach (Task task in taskList.listOfTasks)
+                    {
+                        atIndex += 1;
+                        if (task.done == true)
+                        {
+                            Console.WriteLine(atIndex);
+                            taskList.listOfTasks.RemoveAt(atIndex);
+                            goto startLoop;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }                    
                     goto start;
                 case ConsoleKey.D4:
                     count = 0;
@@ -77,7 +92,6 @@ namespace LeftToDo
                     return;
                 default:
                     goto start;
-
             }
         }
     }
