@@ -9,7 +9,7 @@ namespace LeftToDo
         string strNumberKey;
         // int index;
 
-        public void CreateTask()
+        public void CreateTaskWithDueDate()
         {                
             Console.Write("Skriv in namn på uppgift: ");
             string taskName = Console.ReadLine();
@@ -17,7 +17,18 @@ namespace LeftToDo
             string taskDueDate = Console.ReadLine();
             bool taskDone = false;
 
-            listOfTasks.Add(new Task(taskName, taskDueDate, taskDone));
+            listOfTasks.Add(new TaskWithDueDate(taskName, taskDueDate, taskDone));
+        }
+
+        public void CreateTaskWithChecklist()
+        {                
+            Console.Write("Skriv in namn på uppgift: ");
+            string taskName = Console.ReadLine();
+            string taskDueDate = null;
+            
+            bool taskDone = false;
+
+            listOfTasks.Add(new TaskWithChecklist(taskName, taskDueDate, taskDone));
         }
 
         public void ChangeStateOfTask()

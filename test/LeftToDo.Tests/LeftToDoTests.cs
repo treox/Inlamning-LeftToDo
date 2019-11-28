@@ -16,7 +16,7 @@ namespace LeftToDo.Tests
             // act
             try
             {
-                taskList.listOfTasks.Add(new Task("Testtask 1", "2019.11.29", false));
+                taskList.listOfTasks.Add(new TaskWithDueDate("Testtask 1", "2019.11.29", false));
                 throwError = false;
             }
             catch
@@ -35,8 +35,8 @@ namespace LeftToDo.Tests
             TaskList taskList = new TaskList();
             
             // act
-            taskList.listOfTasks.Add(new Task("Testtask 1", "2019.11.29", false));
-            taskList.listOfTasks.Add(new Task("Testtask 2", "2019.11.29", false));
+            taskList.listOfTasks.Add(new TaskWithDueDate("Testtask 1", "2019.11.29", false));
+            taskList.listOfTasks.Add(new TaskWithDueDate("Testtask 2", "2019.11.29", false));
             taskList.listOfTasks[1].done = true;
 
             // assert
@@ -53,8 +53,8 @@ namespace LeftToDo.Tests
             ArchiveList archiveList = new ArchiveList();
             
             // act
-            taskList.listOfTasks.Add(new Task("Testtask 1", "2019.11.29", true));
-            taskList.listOfTasks.Add(new Task("Testtask 2", "2019.11.29", true));
+            taskList.listOfTasks.Add(new TaskWithDueDate("Testtask 1", "2019.11.29", true));
+            taskList.listOfTasks.Add(new TaskWithDueDate("Testtask 2", "2019.11.29", true));
 
             int count = 0;
             foreach (Task task in taskList.listOfTasks)
@@ -62,7 +62,7 @@ namespace LeftToDo.Tests
                 count += 1;
                 if (task.done == true)
                 {
-                    archiveList.listOfArchive.Add(new Task(task.activityName, task.activityDueDate, task.done));
+                    archiveList.listOfArchive.Add(new TaskWithDueDate(task.activityName, task.activityDueDate, task.done));
                 }
             }
 
