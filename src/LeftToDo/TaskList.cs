@@ -34,7 +34,7 @@ namespace LeftToDo
                 Console.WriteLine(listOfTasks.Count);
                 int numberKey = Int32.Parse(strNumberKey);
             
-                listOfTasks[numberKey].done = true;
+                listOfTasks[numberKey - 1].done = true;
             }
             else if (choice.Key != ConsoleKey.Y)
             {
