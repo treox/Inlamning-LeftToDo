@@ -9,17 +9,18 @@ namespace LeftToDo
         private ConsoleKeyInfo startMenuChoice;
 
         TaskList taskList = new TaskList();
-        ArchiveList archiveList = new ArchiveList(); 
+        ArchiveList archiveList = new ArchiveList();
 
         public void PresentStartMenu()
         {
             start:
             Console.WriteLine();
-            Console.WriteLine("[1] Lägg till uppgift");
-            Console.WriteLine("[2] Visa lista på uppgifter");
-            Console.WriteLine("[3] Arkivera uppgifter");
-            Console.WriteLine("[4] Visa arkiv");
-            Console.WriteLine("[5] Avsluta");
+            Console.WriteLine("[1] Lägg till uppgift med deadline");
+            Console.WriteLine("[2] Lägg till uppgift med checklista");
+            Console.WriteLine("[3] Visa lista på uppgifter");
+            Console.WriteLine("[4] Arkivera uppgifter");
+            Console.WriteLine("[5] Visa arkiv");
+            Console.WriteLine("[6] Avsluta");
             Console.WriteLine("Välj:");
 
             startMenuChoice = Console.ReadKey();
@@ -27,9 +28,14 @@ namespace LeftToDo
             switch(startMenuChoice.Key)
             {
                 case ConsoleKey.D1:
-                    taskList.CreateTask();
+                    taskList.CreateTaskWithDueDate();
                     goto start;
+
                 case ConsoleKey.D2:
+                    taskList.CreateTaskWithChecklist();
+                    goto start;
+
+                case ConsoleKey.D3:
                     int count = 0;
                     foreach(Task task in taskList.listOfTasks)
                     {
@@ -42,12 +48,20 @@ namespace LeftToDo
                         }
                         else
                         {
-                            Console.WriteLine($"Uppgift [{count}]: {task.activityName} Deadline: {task.activityDueDate}");
+                            if (task.activityDueDate != null)
+                            {
+                                Console.WriteLine($"Uppgift [{count}]: {task.activityName} Deadline: {task.activityDueDate}");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Uppgift [{count}]: {task.activityName}");
+                            }
                         }
                     }
                     taskList.ChangeStateOfTask();
                     goto start;
-                case ConsoleKey.D3:
+
+                case ConsoleKey.D4:
                     int index = 0;
                     foreach (Task task in taskList.listOfTasks)
                     {
@@ -55,7 +69,7 @@ namespace LeftToDo
                         if (task.done == true)
                         {
                             Console.WriteLine(task.activityName);
-                            archiveList.listOfArchive.Add(new Task(task.activityName, task.activityDueDate, task.done));
+                            archiveList.listOfArchive.Add(new TaskWithDueDate(task.activityName, task.activityDueDate, task.done));
                         }
                         else if(task.done == false)
                         {
@@ -80,7 +94,8 @@ namespace LeftToDo
                         }
                     }                    
                     goto start;
-                case ConsoleKey.D4:
+
+                case ConsoleKey.D5:
                     foreach (Task archivedTask in archiveList.listOfArchive)
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
@@ -88,7 +103,8 @@ namespace LeftToDo
                         Console.ForegroundColor = ConsoleColor.Gray;
                     }
                     goto start;
-                case ConsoleKey.D5:
+
+                case ConsoleKey.D6:
                     return;
                 default:
                     goto start;
