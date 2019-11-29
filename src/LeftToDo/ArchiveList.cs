@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace LeftToDo
@@ -14,6 +15,16 @@ namespace LeftToDo
         public override void RemoveTaskFromList(int index)
         {
             listOfArchive.RemoveAt(index);
+        }
+
+        public override void DisplayListContent()
+        {
+            foreach (Task archivedTask in listOfArchive)
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine($"Uppgift: {archivedTask.activityName} Utförd {0}", Console.ForegroundColor);
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
         }
     }
 }

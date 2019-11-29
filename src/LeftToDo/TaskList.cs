@@ -18,6 +18,32 @@ namespace LeftToDo
             listOfTasks.RemoveAt(index);
         }
 
+        public override void DisplayListContent()
+        {
+            int count = 0;
+            foreach(Task task in listOfTasks)
+            {
+                count += 1;
+                if (task.done == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"Uppgift [{count}]: {task.activityName} Utförd {0}", Console.ForegroundColor);
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+                else
+                {
+                    if (task.activityDueDate != null)
+                    {
+                        Console.WriteLine($"Uppgift [{count}]: {task.activityName} Deadline: {task.activityDueDate}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Uppgift [{count}]: {task.activityName}");
+                    }
+                }
+            }
+        }
+
         public void ChangeStateOfTask()
         {
             Console.Write("Vill du ändra uppgift till Utförd? Om ja välj [y]");

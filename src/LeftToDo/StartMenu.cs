@@ -51,28 +51,7 @@ namespace LeftToDo
                     goto start;
 
                 case ConsoleKey.D3:
-                    int count = 0;
-                    foreach(Task task in taskList.listOfTasks)
-                    {
-                        count += 1;
-                        if (task.done == true)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine($"Uppgift [{count}]: {task.activityName} Utförd {0}", Console.ForegroundColor);
-                            Console.ForegroundColor = ConsoleColor.Gray;
-                        }
-                        else
-                        {
-                            if (task.activityDueDate != null)
-                            {
-                                Console.WriteLine($"Uppgift [{count}]: {task.activityName} Deadline: {task.activityDueDate}");
-                            }
-                            else
-                            {
-                                Console.WriteLine($"Uppgift [{count}]: {task.activityName}");
-                            }
-                        }
-                    }
+                    taskList.DisplayListContent();
                     taskList.ChangeStateOfTask();
                     goto start;
 
@@ -98,7 +77,7 @@ namespace LeftToDo
                         atIndex += 1;
                         if (task.done == true)
                         {
-                                taskList.listOfTasks.RemoveAt(atIndex);
+                                taskList.RemoveTaskFromList(atIndex);
                                 goto startLoop;
                         }
                         else if (task.done == false)
@@ -109,12 +88,7 @@ namespace LeftToDo
                     goto start;
 
                 case ConsoleKey.D5:
-                    foreach (Task archivedTask in archiveList.listOfArchive)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.WriteLine($"Uppgift: {archivedTask.activityName} Utförd {0}", Console.ForegroundColor);
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                    }
+                    archiveList.DisplayListContent();
                     goto start;
 
                 case ConsoleKey.D6:
