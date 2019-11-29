@@ -4,15 +4,14 @@ namespace LeftToDo
 {
     public class TaskWithChecklist : Task
     {
-        // public string activityNameTC { get; private set; }
-        List<string> checklist = new List<string>();
-        // public bool doneTC { get; set;}
+        List<string> checklist;
 
-        public TaskWithChecklist(string activityName, string activtyDueDate, bool done)
+        public TaskWithChecklist(string activityName, string activityDueDate, bool done) : base(activityName, activityDueDate, done)
         {
             this.activityName = activityName;
+            this.activityDueDate = activityDueDate;
             this.done = done;
+            checklist = new List<string>();
         }
-
     }
 }
