@@ -7,6 +7,7 @@ namespace LeftToDo
     {
 
         private ConsoleKeyInfo startMenuChoice;
+        private ConsoleKeyInfo answer;
 
         TaskList taskList = new TaskList();
         ArchiveList archiveList = new ArchiveList();
@@ -46,6 +47,22 @@ namespace LeftToDo
                     bool taskDoneWC = false;
 
                     TaskWithChecklist taskWC = new TaskWithChecklist(taskNameWC, taskDueDateWC, taskDoneWC);
+
+                    // TODO: Improve checklist functionality.
+                    addTaskToChecklist:
+                    Console.Write("Vill du lägga till en uppgift i checklistan. Om ja välj [y]?");
+                    answer = Console.ReadKey();
+                    if (answer.Key == ConsoleKey.Y)
+                    {
+                        Console.WriteLine("Skriv in en uppgift: ");
+                        string subTask = Console.ReadLine();
+                        taskWC.checklist.Add(subTask);
+                        goto addTaskToChecklist;
+                    }
+                    else if (answer.Key != ConsoleKey.Y)
+                    {
+                        Console.WriteLine("Går tillbaka till menyn...");
+                    }
 
                     taskList.AddTaskToList(taskWC);
                     goto start;

@@ -4,7 +4,7 @@ namespace LeftToDo
 {
     public class TaskWithChecklist : Task
     {
-        List<string> checklist;
+        public List<string> checklist;
 
         public TaskWithChecklist(string activityName, string activityDueDate, bool done) : base(activityName, activityDueDate, done)
         {
