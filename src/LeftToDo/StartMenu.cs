@@ -28,11 +28,26 @@ namespace LeftToDo
             switch(startMenuChoice.Key)
             {
                 case ConsoleKey.D1:
-                    taskList.CreateTaskWithDueDate();
+                    Console.Write("Skriv in namn på uppgift: ");
+                    string taskNameWD = Console.ReadLine();
+                    Console.Write("Skriv in datum när uppgiften ska vara klar: ");
+                    string taskDueDateWD = Console.ReadLine();
+                    bool taskDoneWD = false;
+
+                    TaskWithDueDate taskWD = new TaskWithDueDate(taskNameWD, taskDueDateWD, taskDoneWD);
+
+                    taskList.AddTaskToList(taskWD);
                     goto start;
 
                 case ConsoleKey.D2:
-                    taskList.CreateTaskWithChecklist();
+                    Console.Write("Skriv in namn på uppgift: ");
+                    string taskNameWC = Console.ReadLine();
+                    string taskDueDateWC = null;
+                    bool taskDoneWC = false;
+
+                    TaskWithChecklist taskWC = new TaskWithChecklist(taskNameWC, taskDueDateWC, taskDoneWC);
+
+                    taskList.AddTaskToList(taskWC);
                     goto start;
 
                 case ConsoleKey.D3:
@@ -68,8 +83,7 @@ namespace LeftToDo
                         index += 1;
                         if (task.done == true)
                         {
-                            Console.WriteLine(task.activityName);
-                            archiveList.listOfArchive.Add(new TaskWithDueDate(task.activityName, task.activityDueDate, task.done));
+                            archiveList.AddTaskToList(new TaskWithDueDate(task.activityName, task.activityDueDate, task.done));
                         }
                         else if(task.done == false)
                         {
@@ -84,7 +98,6 @@ namespace LeftToDo
                         atIndex += 1;
                         if (task.done == true)
                         {
-                                Console.WriteLine(atIndex);
                                 taskList.listOfTasks.RemoveAt(atIndex);
                                 goto startLoop;
                         }

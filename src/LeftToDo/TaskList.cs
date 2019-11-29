@@ -3,32 +3,19 @@ using System.Collections.Generic;
 
 namespace LeftToDo
 {
-    public class TaskList
+    public class TaskList : List
     {
         public List<Task> listOfTasks = new List<Task>();
         string strNumberKey;
-        // int index;
 
-        public void CreateTaskWithDueDate()
-        {                
-            Console.Write("Skriv in namn på uppgift: ");
-            string taskName = Console.ReadLine();
-            Console.Write("Skriv in datum när uppgiften ska vara klar: ");
-            string taskDueDate = Console.ReadLine();
-            bool taskDone = false;
-
-            listOfTasks.Add(new TaskWithDueDate(taskName, taskDueDate, taskDone));
+        public override void AddTaskToList(Task typeOfTaskToAdd)
+        {
+            listOfTasks.Add(typeOfTaskToAdd);
         }
 
-        public void CreateTaskWithChecklist()
-        {                
-            Console.Write("Skriv in namn på uppgift: ");
-            string taskName = Console.ReadLine();
-            string taskDueDate = null;
-            
-            bool taskDone = false;
-
-            listOfTasks.Add(new TaskWithChecklist(taskName, taskDueDate, taskDone));
+        public override void RemoveTaskFromList(int index)
+        {
+            listOfTasks.RemoveAt(index);
         }
 
         public void ChangeStateOfTask()
